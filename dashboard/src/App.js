@@ -80,7 +80,7 @@ function ComplaintDashboard() {
   useEffect(() => {
     async function fetchData() {
       setIsLoading(true);
-      const response = await fetch("https://scrape-project-server.vercel.app/api/" + brand);
+      const response = await fetch("https://scrape-project-3.vercel.app/" + brand);
       const complaintList = await response.json();
       setComplaints(complaintList);
       setIsLoading(false);
