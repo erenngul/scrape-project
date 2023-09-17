@@ -28,8 +28,13 @@ function TabMenu({ onTabClick, onHeaderChange, isLoading }) {
     <>
       <div className="flex" style={isLoading ? {pointerEvents: "none"} : {}}>
         <Tab tabName="Turkcell" onTabClick={() => handleClick("turkcell")} onHeaderChange={handleHeaderChangeClick} />
-        <Tab tabName="Fizy" onTabClick={() => handleClick("fizy")} onHeaderChange={handleHeaderChangeClick} />
         <Tab tabName="TV+" onTabClick={() => handleClick("turkcell-tv")} onHeaderChange={handleHeaderChangeClick} />
+        <Tab tabName="BiP" onTabClick={() => handleClick("bip")} onHeaderChange={handleHeaderChangeClick} />
+        <Tab tabName="Fizy" onTabClick={() => handleClick("fizy")} onHeaderChange={handleHeaderChangeClick} />
+        <Tab tabName="Dijital Operatör" onTabClick={() => handleClick("dijital-operator")} onHeaderChange={handleHeaderChangeClick} />
+        <Tab tabName="Platinum" onTabClick={() => handleClick("platinum")} onHeaderChange={handleHeaderChangeClick} />
+        <Tab tabName="Game+" onTabClick={() => handleClick("geforce-now-powered-by-game")} onHeaderChange={handleHeaderChangeClick} />
+        <Tab tabName="GNC" onTabClick={() => handleClick("gnc")} onHeaderChange={handleHeaderChangeClick} />
       </div>
     </>
   );
@@ -80,7 +85,16 @@ function ComplaintDashboard() {
   useEffect(() => {
     async function fetchData() {
       setIsLoading(true);
-      const response = await fetch("https://scrape-project-server.vercel.app" + brand);
+      let response;
+      if (brand === "dijital-operator" || brand === "platinum" || brand === "gnc") {
+        response = await fetch("/turkcell/" + brand);
+      }
+      else if (brand === "geforce-now-powered-by-game") {
+        response = await fetch("/game");
+      }
+      else {
+        response = await fetch("/" + brand);
+      }
       const complaintList = await response.json();
       setComplaints(complaintList);
       setIsLoading(false);
