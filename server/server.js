@@ -1,6 +1,18 @@
 const puppeteer = require('puppeteer')
 const express = require('express');
+const path = require('path');
+const cors = require('cors');
 const app = express();
+
+app.use(cors({
+    origin: '',
+    method: ["POST", "GET"],
+    credential: true
+}))
+
+app.get('/', (req, res) => {
+    res.status(200).send('hello');
+});
 
 app.get("/api/:brand", async (req, res) => { 
     const browser = await puppeteer.launch({ headless: 'new' });
