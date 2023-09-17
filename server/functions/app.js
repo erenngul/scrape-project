@@ -1,19 +1,11 @@
-const puppeteer = require('puppeteer')
+const puppeteer = require('puppeteer');
 const express = require('express');
-const path = require('path');
-const cors = require('cors');
+const serverless = require('serverless-http');
+
 const app = express();
+const router = express.Router();
 
-app.use(cors({
-    origin: ['https://scrape-project-3.vercel.app', 'http://localhost:3000'],
-    method: ["POST", "GET"]
-}))
-
-app.get('/', (req, res) => {
-    res.status(200).send('hello');
-});
-
-app.get("/api/:brand", async (req, res) => { 
+router.get("/api/:brand", async (req, res) => { 
     const browser = await puppeteer.launch({ headless: 'new' });
     const page = await browser.newPage();
 
@@ -39,5 +31,9 @@ app.get("/api/:brand", async (req, res) => {
     res.json(complaintList);
     await browser.close();
 });
+
+app.use('/api/', router);
+
+export const handler = serverless(app);
 
 app.listen(5000, () => console.log("Server started on port 5000"));
