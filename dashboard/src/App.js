@@ -80,7 +80,7 @@ function ComplaintDashboard() {
   useEffect(() => {
     async function fetchData() {
       setIsLoading(true);
-      const response = await fetch("http://localhost:5000/api/" + brand);
+      const response = await fetch("http://localhost:5000/api/" + brand); // bura değişçek
       const complaintList = await response.json();
       setComplaints(complaintList);
       setIsLoading(false);
