@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const cors = require('cors');
 const puppeteer = require('puppeteer');
+const chromium = require('chrome-aws-lambda');
 
 require('dotenv').config();
 
@@ -18,7 +19,13 @@ app.use(express.json());
 
 app.get("/api/:brand", async (req, res) => {
   try {
-    const browser = await puppeteer.launch({ headless: 'new' });
+    const browser = await chromium.puppeteer.launch({
+      args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
+      defaultViewport: chromium.defaultViewport,
+      executablePath: await chromium.executablePath,
+      headless: 'new',
+      ignoreHTTPSErrors: true
+    });
     const page = await browser.newPage();
 
     let complaintList = [];
@@ -42,7 +49,7 @@ app.get("/api/:brand", async (req, res) => {
     console.log(complaintList);
     res.json(complaintList);
     await browser.close();
-  } catch (err) {}
+  } catch (err) { }
 });
 
 app.use('/api/v1', api);
