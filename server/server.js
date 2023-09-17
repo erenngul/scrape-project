@@ -5,7 +5,8 @@ const cors = require('cors');
 const app = express();
 
 app.use(cors({
-    origin: '',
+    https: true,
+    origin: 'https://scrape-project-3.vercel.app/',
     method: ["POST", "GET"],
     credential: true
 }))
