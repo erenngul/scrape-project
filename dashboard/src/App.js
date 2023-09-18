@@ -7,6 +7,7 @@ import dijitalOperatorLogo from './dijital_op.png';
 import platiniumLogo from './platinum.png';
 import gamePlusLogo from './gameplus.jpg';
 import gncLogo from './gnc.png';
+import loadingGif from './images/loading.gif'
 
 
 function Tab({ tabName, logo, onTabClick, onHeaderChange }) {
