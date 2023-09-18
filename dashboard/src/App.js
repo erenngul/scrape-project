@@ -7,7 +7,7 @@ import dijitalOperatorLogo from './dijital_op.png';
 import platiniumLogo from './platinum.png';
 import gamePlusLogo from './gameplus.jpg';
 import gncLogo from './gnc.png';
-
+import loadingGif from './loading.gif';
 
 function Tab({ tabName, onTabClick, onHeaderChange }) {
   function handleHeaderChange(tabName) {
@@ -42,7 +42,7 @@ function TabMenu({ onTabClick, onHeaderChange, isLoading }) {
         <Tab tabName={<img src={fizyLogo} alt="Fizy" height={"50px"} width={"50px"} />} onTabClick={() => handleClick("fizy")} onHeaderChange={handleHeaderChangeClick} />
         <Tab tabName={<img src={dijitalOperatorLogo} alt="Dijital Operatör" height={"50px"} width={"50px"} />} onTabClick={() => handleClick("dijital-operator")} onHeaderChange={handleHeaderChangeClick} />
         <Tab tabName={<img src={platiniumLogo} alt="Platinium" height={"60px"} width={"60px"} />} onTabClick={() => handleClick("platinum")} onHeaderChange={handleHeaderChangeClick} />
-        <Tab tabName={<img src={gamePlusLogo} alt="GamePlus" height={"70px"} width={"70px"} />} onTabClick={() => handleClick("geforce-now-powered-by-game")} onHeaderChange={handleHeaderChangeClick} />
+        <Tab tabName={<img src={gamePlusLogo} alt="GamePlus" height={"80px"} width={"80px"} />} onTabClick={() => handleClick("geforce-now-powered-by-game")} onHeaderChange={handleHeaderChangeClick} />
         <Tab tabName={<img src={gncLogo} alt="GNC" height={"50px"} width={"50px"} />} onTabClick={() => handleClick("gnc")} onHeaderChange={handleHeaderChangeClick} />
       </div>
     </>
@@ -79,7 +79,10 @@ function ComplaintCardMenu({ complaints, isLoading }) {
               );
             }
             return <></>
-          }) : <p className="text-2xl px-2 py-2">Loading...</p>
+          }) : <div className="flex items-center">
+                <p className="text-2xl px-2 py-2">Loading</p>
+                <img src={loadingGif} alt="Gif" height={"70px"} width={"70px"} />
+              </div>
       }
     </div>
   );
