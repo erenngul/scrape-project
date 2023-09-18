@@ -7,20 +7,19 @@ import dijitalOperatorLogo from './dijital_op.png';
 import platiniumLogo from './platinum.png';
 import gamePlusLogo from './gameplus.jpg';
 import gncLogo from './gnc.png';
-import loadingGif from './images/loading.gif'
+import loadingGif from './loading.gif'
 
-
-function Tab({ tabName, logo, onTabClick, onHeaderChange }) {
+function Tab({ tabName, onTabClick, onHeaderChange }) {
   function handleHeaderChange(tabName) {
     onHeaderChange(tabName);
   }
 
   return (
     <button
-      className="text-gray-400 border-b-2 border-b-gray-100 hover:text-stone-600 hover:border-b-2 hover:border-gray-400 focus:text-yellow-400 focus:border-yellow-400 focus:border-b-2 px-2 py-1 mr-5"
-      onClick={() => { onTabClick(); handleHeaderChange(tabName); }}
+      className="text-stone-400 border-b-2 border-b-white hover:text-stone-600 hover:border-b-2 hover:border-stone-300 focus:text-yellow-400 focus:border-yellow-400 focus:border-b-2 px-2 py-1 mr-5"
+      onClick={() => {onTabClick(); handleHeaderChange(tabName);}}
     >
-      {logo}
+      {tabName}
     </button>
   );
 }
@@ -43,7 +42,7 @@ function TabMenu({ onTabClick, onHeaderChange, isLoading }) {
         <Tab tabName={<img src={fizyLogo} alt="Fizy" height={"50px"} width={"50px"} />} onTabClick={() => handleClick("fizy")} onHeaderChange={handleHeaderChangeClick} />
         <Tab tabName={<img src={dijitalOperatorLogo} alt="Dijital Operatör" height={"50px"} width={"50px"} />} onTabClick={() => handleClick("dijital-operator")} onHeaderChange={handleHeaderChangeClick} />
         <Tab tabName={<img src={platiniumLogo} alt="Platinium" height={"60px"} width={"60px"} />} onTabClick={() => handleClick("platinum")} onHeaderChange={handleHeaderChangeClick} />
-        <Tab tabName={<img src={gamePlusLogo} alt="GamePlus" height={"70px"} width={"70px"} />} onTabClick={() => handleClick("geforce-now-powered-by-game")} onHeaderChange={handleHeaderChangeClick} />
+        <Tab tabName={<img src={gamePlusLogo} alt="GamePlus" height={"80px"} width={"80px"} />} onTabClick={() => handleClick("geforce-now-powered-by-game")} onHeaderChange={handleHeaderChangeClick} />
         <Tab tabName={<img src={gncLogo} alt="GNC" height={"50px"} width={"50px"} />} onTabClick={() => handleClick("gnc")} onHeaderChange={handleHeaderChangeClick} />
       </div>
     </>
@@ -52,7 +51,7 @@ function TabMenu({ onTabClick, onHeaderChange, isLoading }) {
 
 function ComplaintCard({ title, username, time, description, link }) {
   return (
-    <div className="shadow-lg bg-gray-50 border-yellow-400 border-2 p-2 my-5 rounded-md">
+    <div className="shadow-lg border-stone-300 border-2 p-2 my-4 rounded-md">
       <header className="mb-3">
         <h1 className="text-xl">{title}</h1>
         <h2 className="text-sm">{username}</h2>
@@ -127,16 +126,13 @@ function ComplaintDashboard() {
   }
 
   return (
-    <>
-      <h1 className="p-4 text-2xl text-gray-200 bg-[#183e95] sticky top-0 flex">
-        <img src={turkcellSmallLogo} alt="Turkcell" height={"auto"} width={"37px"} />
-        <p className="ml-2">Turkcell Şikayet Merkezi - {header}</p>
+    <div className="m-10">
+      <h1 className="px-2 pb-5 text-3xl">
+        Turkcell Şikayet Merkezi - {header}
       </h1>
-      <div className="p-10 bg-gray-100">
-        <TabMenu onTabClick={handleTabClick} onHeaderChange={handleHeaderChange} isLoading={isLoading} />
-        <ComplaintCardMenu complaints={complaints} isLoading={isLoading} />
-      </div>
-    </>
+      <TabMenu onTabClick={handleTabClick} onHeaderChange={handleHeaderChange} isLoading={isLoading} />
+      <ComplaintCardMenu complaints={complaints} isLoading={isLoading} />
+    </div>
   );
 }
 
