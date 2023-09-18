@@ -10,7 +10,7 @@ async function getHtml(req, res, path = '') {
 
         let complaintList = [];
         if (path === "game") {
-            await page.goto(`https://www.sikayetvar.com/geforce-now-powered-by-game`);
+            await page.goto(`https://www.sikayetvar.com/geforce-now-powered-by-game?page=2`);
         }
         else {
             await page.goto(`https://www.sikayetvar.com/${path === '' ? '' : path + '/'}${req.params.brand}?page=${1}`);
