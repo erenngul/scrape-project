@@ -3,17 +3,17 @@ const express = require('express');
 
 const app = express();
 
-async function getHtml(req, res, path = '') {
+async function getHtml(req, res, path = '', pageIndex) {
     try {
         const browser = await puppeteer.launch({ headless: 'new' });
         const page = await browser.newPage();
 
         let complaintList = [];
         if (path === "game") {
-            await page.goto(`https://www.sikayetvar.com/geforce-now-powered-by-game?page=3`);
+            await page.goto(`https://www.sikayetvar.com/geforce-now-powered-by-game?page=${pageIndex}`);
         }
         else {
-            await page.goto(`https://www.sikayetvar.com/${path === '' ? '' : path + '/'}${req.params.brand}?page=${1}`);
+            await page.goto(`https://www.sikayetvar.com/${path === '' ? '' : path + '/'}${req.params.brand}?page=${pageIndex}`);
         }
         const complaints = await page.$$eval('.card-v2', (elements) => elements.map((e) => {
             if (e.querySelector('.complaint-hidden')) {
@@ -35,26 +35,26 @@ async function getHtml(req, res, path = '') {
     }
     catch (err) {
         res.json([{
-            title: "Error",
+            title: "Hata:",
             username: "",
             time: "",
-            description: "",
+            description: "Sayfa yüklenemedi.",
             link: ""
         }]);
     }
 }
 
-app.get("/:brand", (req, res) => {
+app.get("/:brand/:pageIndex", (req, res) => {
     if (req.params.brand === "game") {
-        getHtml(req, res, "game");
+        getHtml(req, res, "game", parseInt(req.params.pageIndex));
     }
     else {
-        getHtml(req, res);
+        getHtml(req, res, '', parseInt(req.params.pageIndex));
     }
 });
 
-app.get("/turkcell/:brand", (req, res) => {
-    getHtml(req, res, "turkcell");
+app.get("/turkcell/:brand/:pageIndex", (req, res) => {
+    getHtml(req, res, "turkcell", parseInt(req.params.pageIndex));
 });
 
 app.listen(5000, () => console.log("Server started on port 5000"));
