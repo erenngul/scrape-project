@@ -2,7 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  background-color: rgb(243 244 246);
+}
+
 .tab-hover:hover {
-    transform: scale(1.4);
-    transition: transform 0.35s ease;
-  }
+  transform: scale(1.4);
+  transition: transform 0.35s ease;
+}
