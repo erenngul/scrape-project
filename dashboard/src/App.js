@@ -17,7 +17,7 @@ function Tab({ tabName, logo, onTabClick, onHeaderChange }) {
 
   return (
     <button
-      className="text-gray-400 border-b-2 border-b-gray-100 hover:text-stone-600 hover:border-b-2 hover:border-gray-400 focus:text-yellow-400 focus:border-yellow-400 focus:border-b-2 px-2 py-1 mr-5"
+      className="text-gray-400 border-b-2 border-b-gray-100  focus:text-yellow-400 focus:border-yellow-400 focus:border-b-2 px-2 py-1 mr-5 tab-hover"
       onClick={() => { onTabClick(); handleHeaderChange(tabName); }}
     >
       {logo}
