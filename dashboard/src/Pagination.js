@@ -21,7 +21,7 @@ export default function Pagination({ onPageClick, onKeyDown, pageIndex, isLoadin
           </button>
           <button
             className="border-2 border-yellow-400 bg-white rounded-md p-1"
-            onClick={() => onPageClick(pageIndex + 1)}
+            onClick={() => onPageClick(parseInt(pageIndex) + 1)}
           >
             Sonraki Sayfa
           </button>

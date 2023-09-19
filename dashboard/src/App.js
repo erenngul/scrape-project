@@ -15,6 +15,7 @@ function Tab({ tabName, logo, onTabClick, onHeaderChange }) {
   return (
     <button
       className="text-gray-400 border-b-2 border-b-gray-100  focus:text-yellow-400 focus:border-yellow-400 focus:border-b-2 px-2 py-1 mr-5 tab-hover"
+      title={tabName}
       onClick={() => { onTabClick(); onHeaderChange(tabName); }}
     >
       {logo}
@@ -89,7 +90,7 @@ function ComplaintCard({ title, username, time, description, link }) {
         <h2 className="text-sm">{username}</h2>
         <div className="text-sm">{time}</div>
       </header>
-      <p>{description}</p>
+      <p>{description} <a className="text-blue-700 ml-3 underline" href={link} target='_blank' rel='noreferrer'>daha fazla</a></p>
     </div>
   );
 }
@@ -107,6 +108,7 @@ function ComplaintCardMenu({ complaints, isLoading }) {
                   username={complaint.username}
                   description={complaint.description}
                   time={complaint.time}
+                  link={complaint.link}
                 />
               );
             }
@@ -129,7 +131,6 @@ function ComplaintDashboard() {
   const [isLoading, setIsLoading] = useState(false);
   const [complaints, setComplaints] = useState([]);
   const [pageIndex, setPageIndex] = useState(1);
-  let lastPageIndex;
 
   useEffect(() => {
     async function fetchData() {
@@ -173,6 +174,7 @@ function ComplaintDashboard() {
   function handleKeyPress(event) {
     if (event.key === "Enter") {
       handlePageClick(event.target.value);
+      event.target.value = "";
     }
   }
 
